@@ -26,13 +26,9 @@ export default {
     web: {
       favicon: './assets/favicon.png'
     },
-    updates: {
-      enabled: false,
-      checkAutomatically: 'ON_ERROR_RECOVERY'
-    },
     extra: {
-      supabaseUrl: process.env.SUPABASE_URL,
-      supabaseAnonKey: process.env.SUPABASE_ANON_KEY,
+      supabaseUrl: "https://your-supabase-project-id.supabase.co",
+      supabaseAnonKey: "your-supabase-anon-key",
       openaiApiKey: process.env.OPENAI_API_KEY,
     }
   }
