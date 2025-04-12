@@ -1,0 +1,88 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+---
+Description: Coding rules for Max Your Look mobile app
+Globs: *.ts, *.tsx
+---
+
+# TypeScript and Code Style
+- Use TypeScript with strict mode for all code.
+- Prefer interfaces over types; e.g., `interface UserProps { id: string }`.
+- Avoid enums; use maps like `const Scores = { jawline: 70 }`.
+- Write functional components; e.g., `function PhotoUploadScreen()`.
+- Use descriptive names: `isAnalyzing`, `hasPremium`.
+- Structure files: exported component, helpers, types (e.g., `PhotoUploadScreen.tsx`).
+
+# Syntax and Formatting
+- Use `function` keyword for pure functions; e.g., `function calculateScore()`.
+- Avoid curly braces for simple conditionals; e.g., `if (error) return <ErrorView />`.
+- Format with Prettier: 2-space indents, single quotes.
+
+# Project Structure
+- Use lowercase-dash directories; e.g., `screens/photo-upload`.
+- Favor named exports; e.g., `export function AnalysisScreen()`.
+
+# UI and Styling
+- Use Expo components (e.g., `View`, `Text`) for layouts.
+- Style with Tailwind CSS or styled-components; e.g., `tw`bg-black text-gold``.
+- Colors: Black (#000000), White (#FFFFFF), Gold (#FFD700).
+- Typography: Roboto, 16px body, 24px headings, bold weights.
+- Ensure responsive design with Flexbox and `useWindowDimensions`.
+- Support dark mode with `useColorScheme`.
+
+# Safe Area Management
+- Wrap app in `SafeAreaProvider` from `react-native-safe-area-context`.
+- Use `SafeAreaView` for screens; e.g., `<SafeAreaView><AnalysisScreen /></SafeAreaView>`.
+
+# Performance
+- Use Redux with `useReducer` for state (e.g., `premiumStatus`, `scores`).
+- Lazy load non-critical screens with `React.lazy` and `Suspense`.
+- Optimize images with `expo-image` (WebP, lazy loading).
+- Memoize with `useMemo` for score calculations; e.g., `const percentage = useMemo(() => ...)`.
+- Use `SplashScreen` for startup.
+
+# Navigation
+- Use `react-navigation` with stack navigator; e.g., `createStackNavigator()`.
+- Routes: `Onboarding`, `PhotoUpload`, `Analysis`, `Routine`, `Progress`, `PremiumLock`.
+
+# State Management
+- Store `user`, `analysis`, `routine` in Redux.
+- Cache routines in `AsyncStorage` for offline use; e.g., `AsyncStorage.setItem('routine', JSON.stringify(tasks))`.
+- Fetch data with `react-query`; e.g., `useQuery('analysis', fetchAnalysis)`.
+
+# Error Handling
+- Use Zod for API response validation; e.g., `scoresSchema.parse(response)`.
+- Log errors with Sentry; e.g., `Sentry.captureException(error)`.
+- Handle errors early; e.g., `if (!photo) return <ErrorView />`.
+- Add global error boundary in `App.tsx`.
+
+# External APIs
+- Google Vision for analysis:
+  - Endpoint: `POST https://vision.googleapis.com/v1/images:annotate`.
+  - Features: `FACE_DETECTION`.
+- OpenAI for routines:
+  - Prompt: `Generate 3-5 tasks (max 30 mins) for model-type look based on scores`.
+
+# Database
+- Use Supabase client; e.g., `supabase.from('Analyses').insert({...})`.
+- Encrypt photos in Supabase Storage.
+
+# Payments
+- Use Stripe for premium; e.g., `stripe.paymentIntents.create({ amount: 499 })`.
+
+# Testing
+- Unit tests with Jest; e.g., `test('calculates model percentage', () => ...)`.
+- E2E with Detox; e.g., `describe('Photo upload', () => ...)`.
+
+# Security
+- Store sensitive data (e.g., tokens) in `react-native-encrypted-storage`.
+- Use HTTPS for all API calls.
+
+# Expo Specifics
+- Follow Expo managed workflow (no native code).
+- Use `expo-constants` for API keys; e.g., `Constants.expoConfig.extra.googleVisionKey`.
+- Handle permissions with `expo-permissions` (camera).
+- Enable OTA updates with `expo-updates`.

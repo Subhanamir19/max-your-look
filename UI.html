@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Max Your Look - Mobile UI</title>
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- DaisyUI via CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.9.4/dist/full.css" rel="stylesheet">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    
+    <style>
+        /* Custom styles */
+        body {
+            background-color: #f5f5f5;
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .phone-frame {
+            width: 375px;
+            height: 812px;
+            background: white;
+            border-radius: 40px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            margin: 2rem;
+            position: relative;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #FFD700 0%, #FFF5D7 100%);
+        }
+
+        .screen-container {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .screen-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .screen {
+            scroll-snap-align: start;
+            flex: 0 0 375px;
+            height: 812px;
+        }
+
+        .hover-scale {
+            transition: transform 0.2s;
+        }
+
+        .hover-scale:hover {
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body class="min-h-screen p-8">
+    <div class="screen-container flex">
+        <!-- Welcome Screen -->
+        <div class="screen phone-frame">
+            <div class="h-full gradient-bg flex flex-col items-center justify-between p-8">
+                <div class="mt-20">
+                    <img src="https://images.unsplash.com/photo-1618677366787-9727aacca7ea?auto=format&fit=crop&w=200&h=200" 
+                         alt="App Logo" 
+                         class="w-32 h-32 rounded-full shadow-lg mb-8">
+                    <h1 class="text-4xl font-bold text-black text-center mb-4">Max Your Look</h1>
+                    <p class="text-black text-center text-lg">Discover your perfect model look with AI-powered analysis</p>
+                </div>
+                <div class="w-full space-y-4 mb-8">
+                    <button class="btn btn-neutral w-full hover-scale">Get Started</button>
+                    <button class="btn btn-outline w-full hover-scale">Sign In</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Photo Upload Screen -->
+        <div class="screen phone-frame">
+            <div class="h-full flex flex-col bg-white">
+                <div class="gradient-bg p-6">
+                    <h2 class="text-2xl font-bold text-black">Upload Your Photo</h2>
+                    <p class="text-black mt-2">Let's analyze your features</p>
+                </div>
+                <div class="flex-1 p-6 space-y-6">
+                    <div class="border-2 border-dashed border-gray-300 rounded-xl p-8 hover-scale cursor-pointer flex flex-col items-center justify-center">
+                        <i class="ri-camera-line text-4xl text-gray-400 mb-4"></i>
+                        <p class="text-black text-center">Tap to take a photo or upload from gallery</p>
+                    </div>
+                    <div class="space-y-4">
+                        <h3 class="text-black font-medium">Photo Guidelines:</h3>
+                        <ul class="space-y-2">
+                            <li class="flex items-center text-black">
+                                <i class="ri-check-line mr-2 text-green-500"></i>
+                                Good lighting
+                            </li>
+                            <li class="flex items-center text-black">
+                                <i class="ri-check-line mr-2 text-green-500"></i>
+                                Clear face view
+                            </li>
+                            <li class="flex items-center text-black">
+                                <i class="ri-check-line mr-2 text-green-500"></i>
+                                Neutral expression
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <button class="btn btn-neutral w-full hover-scale">Continue</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analysis Screen -->
+        <div class="screen phone-frame">
+            <div class="h-full flex flex-col bg-white">
+                <div class="gradient-bg p-6">
+                    <h2 class="text-2xl font-bold text-black">Analysis Results</h2>
+                </div>
+                <div class="flex-1 p-6 space-y-6 overflow-y-auto">
+                    <div class="bg-gray-50 rounded-xl p-4 hover-scale">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-black font-medium">Overall Score</h3>
+                            <span class="text-2xl font-bold text-black">85%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-yellow-400 h-2 rounded-full" style="width: 85%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-white shadow-sm rounded-xl p-4 hover-scale">
+                            <h4 class="text-black font-medium mb-2">Facial Features</h4>
+                            <div class="space-y-2">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-black">Symmetry</span>
+                                    <span class="text-black font-medium">90%</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-black">Proportions</span>
+                                    <span class="text-black font-medium">85%</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-black">Skin Quality</span>
+                                    <span class="text-black font-medium">80%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <button class="btn btn-neutral w-full hover-scale">View Detailed Report</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Routine Screen -->
+        <div class="screen phone-frame">
+            <div class="h-full flex flex-col bg-white">
+                <div class="gradient-bg p-6">
+                    <h2 class="text-2xl font-bold text-black">Your Beauty Routine</h2>
+                    <p class="text-black mt-2">Personalized recommendations</p>
+                </div>
+                <div class="flex-1 p-6 space-y-6 overflow-y-auto">
+                    <div class="space-y-4">
+                        <div class="bg-white shadow-sm rounded-xl p-4 hover-scale">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-black font-medium">Morning Routine</h3>
+                                <i class="ri-sun-line text-yellow-400"></i>
+                            </div>
+                            <ul class="space-y-4">
+                                <li class="flex items-start">
+                                    <div class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center mr-3 mt-1">
+                                        <span class="text-black text-sm">1</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-black font-medium">Gentle Cleansing</h4>
+                                        <p class="text-black text-sm">Use a mild cleanser with lukewarm water</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center mr-3 mt-1">
+                                        <span class="text-black text-sm">2</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-black font-medium">Hydration</h4>
+                                        <p class="text-black text-sm">Apply moisturizer while skin is damp</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-white shadow-sm rounded-xl p-4 hover-scale">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-black font-medium">Evening Routine</h3>
+                                <i class="ri-moon-line text-blue-400"></i>
+                            </div>
+                            <ul class="space-y-4">
+                                <li class="flex items-start">
+                                    <div class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center mr-3 mt-1">
+                                        <span class="text-black text-sm">1</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-black font-medium">Deep Cleansing</h4>
+                                        <p class="text-black text-sm">Double cleanse to remove makeup and impurities</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-6 h-6 rounded-full bg-gray-100 flex items-center justify-center mr-3 mt-1">
+                                        <span class="text-black text-sm">2</span>
+                                    </div>
+                                    <div>
+                                        <h4 class="text-black font-medium">Treatment</h4>
+                                        <p class="text-black text-sm">Apply recommended serums and treatments</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <button class="btn btn-neutral w-full hover-scale">Track Progress</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Screen -->
+        <div class="screen phone-frame">
+            <div class="h-full flex flex-col bg-white">
+                <div class="gradient-bg p-6">
+                    <h2 class="text-2xl font-bold text-black">Your Progress</h2>
+                    <p class="text-black mt-2">Track your improvement</p>
+                </div>
+                <div class="flex-1 p-6 space-y-6 overflow-y-auto">
+                    <div class="bg-white shadow-sm rounded-xl p-4 hover-scale">
+                        <h3 class="text-black font-medium mb-4">Progress Timeline</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-4"></div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <h4 class="text-black font-medium">Initial Analysis</h4>
+                                        <span class="text-sm text-black">1 week ago</span>
+                                    </div>
+                                    <p class="text-black text-sm">Started your journey with a score of 85%</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-2 h-2 bg-yellow-400 rounded-full mt-2 mr-4"></div>
+                                <div class="flex-1">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <h4 class="text-black font-medium">Routine Started</h4>
+                                        <span class="text-sm text-black">5 days ago</span>
+                                    </div>
+                                    <p class="text-black text-sm">Began following personalized beauty routine</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white shadow-sm rounded-xl p-4 hover-scale">
+                        <h3 class="text-black font-medium mb-4">Next Steps</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-center">
+                                <i class="ri-calendar-line mr-3 text-yellow-400"></i>
+                                <span class="text-black">Schedule next analysis in 3 days</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="ri-camera-line mr-3 text-yellow-400"></i>
+                                <span class="text-black">Take progress photo tomorrow</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <button class="btn btn-neutral w-full hover-scale">Update Progress</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Premium Lock Screen -->
+        <div class="screen phone-frame">
+            <div class="h-full flex flex-col bg-white">
+                <div class="gradient-bg p-6 flex-1 flex flex-col items-center justify-center text-center">
+                    <i class="ri-vip-crown-line text-6xl text-black mb-6"></i>
+                    <h2 class="text-3xl font-bold text-black mb-4">Unlock Premium Features</h2>
+                    <p class="text-black mb-8">Get access to advanced analysis and personalized recommendations</p>
+                    <div class="w-full space-y-4 px-6">
+                        <div class="bg-white/90 rounded-xl p-4 hover-scale">
+                            <ul class="space-y-4">
+                                <li class="flex items-center">
+                                    <i class="ri-check-line mr-3 text-yellow-400"></i>
+                                    <span class="text-black">Detailed facial analysis</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="ri-check-line mr-3 text-yellow-400"></i>
+                                    <span class="text-black">Weekly progress tracking</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="ri-check-line mr-3 text-yellow-400"></i>
+                                    <span class="text-black">AI-powered recommendations</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-neutral w-full hover-scale">Upgrade Now</button>
+                        <button class="btn btn-outline w-full hover-scale">Maybe Later</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html> 
