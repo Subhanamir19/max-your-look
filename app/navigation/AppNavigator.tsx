@@ -12,6 +12,7 @@ import RoutineScreen from '../screens/RoutineScreen';
 import ProgressScreen from '../screens/ProgressScreen';
 import PremiumLockScreen from '../screens/PremiumLockScreen';
 import OnboardingScreen from '../screens/OnboardingScreen';
+import MainDashboardScreen from '../screens/MainDashboardScreen';
 
 // Define the stack navigator params
 export type RootStackParamList = {
@@ -22,6 +23,7 @@ export type RootStackParamList = {
   Routine: undefined;
   Progress: undefined;
   PremiumLock: undefined;
+  MainDashboard: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -126,6 +128,15 @@ const AppNavigator = () => {
           options={{ 
             headerShown: false,
             presentation: 'modal'
+          }}
+        />
+        
+        <Stack.Screen 
+          name="MainDashboard" 
+          component={MainDashboardScreen}
+          options={{ 
+            headerShown: false,
+            presentation: 'card'
           }}
         />
       </Stack.Navigator>

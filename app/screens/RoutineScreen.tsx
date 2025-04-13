@@ -15,13 +15,15 @@ const mockRoutines = [
   'Follow a water intake schedule of at least 2 liters daily for skin hydration'
 ];
 
-const RoutineScreen = () => {
+const RoutineScreen = ({ navigation }) => {
   const { scores, routines, setRoutines } = useAnalysis();
   const [completedTasks, setCompletedTasks] = useState<number[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   // Initialize with mock data or fetch from API
   useEffect(() => {
     const loadRoutines = async () => {
+      setIsLoading(true);
       try {
         // First check if we have cached routines
         const cachedRoutines = await AsyncStorage.getItem('routines');
@@ -37,6 +39,8 @@ const RoutineScreen = () => {
         }
       } catch (error) {
         console.error('Error loading routines:', error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -109,43 +113,56 @@ const RoutineScreen = () => {
         </Text>
       </View>
       
-      {routines && routines.length > 0 ? (
-        <FlatList
-          data={routines}
-          renderItem={renderRoutineItem}
-          keyExtractor={(_, index) => `routine-${index}`}
-          contentContainerStyle={styles.routinesList}
-        />
-      ) : (
+      {isLoading ? (
         <View style={styles.loadingContainer}>
           <Text style={styles.loadingText}>Generating your routine...</Text>
         </View>
-      )}
-      
-      <View style={styles.progressContainer}>
-        <Text style={styles.progressText}>
-          {completedTasks.length}/{routines?.length || 0} Tasks Completed
-        </Text>
-        <View style={styles.progressBarContainer}>
-          <View 
-            style={[
-              styles.progressBar, 
-              { 
-                width: `${routines?.length ? 
-                  (completedTasks.length / routines.length) * 100 : 0}%` 
-              }
-            ]} 
+      ) : routines && routines.length > 0 ? (
+        <>
+          <FlatList
+            data={routines}
+            renderItem={renderRoutineItem}
+            keyExtractor={(_, index) => `routine-${index}`}
+            contentContainerStyle={styles.routinesList}
           />
+          
+          <View style={styles.progressContainer}>
+            <Text style={styles.progressText}>
+              {completedTasks.length}/{routines?.length || 0} Tasks Completed
+            </Text>
+            <View style={styles.progressBarContainer}>
+              <View 
+                style={[
+                  styles.progressBar, 
+                  { 
+                    width: `${routines?.length ? 
+                      (completedTasks.length / routines.length) * 100 : 0}%` 
+                  }
+                ]} 
+              />
+            </View>
+          </View>
+          
+          <View style={styles.tipContainer}>
+            <Text style={styles.tipTitle}>Pro Tip</Text>
+            <Text style={styles.tipText}>
+              Consistency is key! Complete these tasks daily for best results.
+              You'll see improvements in your scores within weeks.
+            </Text>
+          </View>
+          
+          <TouchableOpacity 
+            style={styles.dashboardButton}
+            onPress={() => navigation.navigate('MainDashboard')}
+          >
+            <Text style={styles.dashboardButtonText}>Continue to Main Dashboard</Text>
+          </TouchableOpacity>
+        </>
+      ) : (
+        <View style={styles.loadingContainer}>
+          <Text style={styles.loadingText}>No routines available yet.</Text>
         </View>
-      </View>
-      
-      <View style={styles.tipContainer}>
-        <Text style={styles.tipTitle}>Pro Tip</Text>
-        <Text style={styles.tipText}>
-          Consistency is key! Complete these tasks daily for best results.
-          You'll see improvements in your scores within weeks.
-        </Text>
-      </View>
+      )}
     </SafeAreaView>
   );
 };
@@ -172,6 +189,7 @@ const styles = StyleSheet.create({
   },
   routinesList: {
     padding: SPACING.large,
+    flexGrow: 1,
   },
   taskItem: {
     flexDirection: 'row',
@@ -257,6 +275,18 @@ const styles = StyleSheet.create({
     fontSize: FONT_SIZES.body,
     color: COLORS.darkGray,
     lineHeight: 22,
+  },
+  dashboardButton: {
+    margin: SPACING.large,
+    backgroundColor: COLORS.gold,
+    padding: SPACING.medium,
+    borderRadius: 8,
+    alignItems: 'center',
+  },
+  dashboardButtonText: {
+    color: COLORS.white,
+    fontSize: FONT_SIZES.body,
+    fontWeight: 'bold',
   },
 });
 

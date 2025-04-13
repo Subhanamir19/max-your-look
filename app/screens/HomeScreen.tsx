@@ -28,6 +28,16 @@ const HomeScreen = ({ navigation }: any) => {
           </TouchableOpacity>
         </View>
         
+        <TouchableOpacity
+          style={styles.dashboardButton}
+          onPress={() => navigation.navigate('MainDashboard')}
+        >
+          <Text style={styles.dashboardButtonText}>Go to Dashboard</Text>
+          <Text style={styles.dashboardButtonSubtext}>
+            View your metrics and daily tasks
+          </Text>
+        </TouchableOpacity>
+        
         <View style={styles.sectionTitle}>
           <Text style={styles.sectionTitleText}>My Journey</Text>
         </View>
@@ -109,7 +119,7 @@ const styles = StyleSheet.create({
     color: COLORS.darkGray,
   },
   mainActionContainer: {
-    marginBottom: SPACING.large,
+    marginBottom: SPACING.medium,
   },
   mainButton: {
     backgroundColor: COLORS.gold,
@@ -129,6 +139,29 @@ const styles = StyleSheet.create({
     marginBottom: SPACING.tiny,
   },
   mainButtonSubtext: {
+    color: COLORS.white,
+    fontSize: FONT_SIZES.small,
+    opacity: 0.9,
+  },
+  dashboardButton: {
+    backgroundColor: COLORS.black,
+    padding: SPACING.medium,
+    borderRadius: 12,
+    alignItems: 'center',
+    marginBottom: SPACING.large,
+    shadowColor: COLORS.black,
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  dashboardButtonText: {
+    color: COLORS.white,
+    fontSize: FONT_SIZES.body,
+    fontWeight: 'bold',
+    marginBottom: SPACING.tiny,
+  },
+  dashboardButtonSubtext: {
     color: COLORS.white,
     fontSize: FONT_SIZES.small,
     opacity: 0.9,
